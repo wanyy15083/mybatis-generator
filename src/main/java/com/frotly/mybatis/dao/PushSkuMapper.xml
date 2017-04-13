@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.frotly.mybatis.dao.PushSkuMapper">
+  <resultMap id="BaseResultMap" type="com.frotly.mybatis.model.PushSku">
+    <id column="XTDM" jdbcType="VARCHAR" property="sysCode" />
+    <id column="SKUID" jdbcType="INTEGER" property="skuId" />
+    <result column="ZHCSSJ" jdbcType="VARCHAR" property="uploadTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    XTDM, SKUID, ZHCSSJ
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gmwtsku
+    where XTDM = #{sysCode,jdbcType=VARCHAR}
+      and SKUID = #{skuId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from gmwtsku
+    where XTDM = #{sysCode,jdbcType=VARCHAR}
+      and SKUID = #{skuId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.frotly.mybatis.model.PushSku">
+    insert into gmwtsku (XTDM, SKUID, ZHCSSJ
+      )
+    values (#{sysCode,jdbcType=VARCHAR}, #{skuId,jdbcType=INTEGER}, #{uploadTime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.frotly.mybatis.model.PushSku">
+    insert into gmwtsku
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sysCode != null">
+        XTDM,
+      </if>
+      <if test="skuId != null">
+        SKUID,
+      </if>
+      <if test="uploadTime != null">
+        ZHCSSJ,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sysCode != null">
+        #{sysCode,jdbcType=VARCHAR},
+      </if>
+      <if test="skuId != null">
+        #{skuId,jdbcType=INTEGER},
+      </if>
+      <if test="uploadTime != null">
+        #{uploadTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.frotly.mybatis.model.PushSku">
+    update gmwtsku
+    <set>
+      <if test="uploadTime != null">
+        ZHCSSJ = #{uploadTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where XTDM = #{sysCode,jdbcType=VARCHAR}
+      and SKUID = #{skuId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.frotly.mybatis.model.PushSku">
+    update gmwtsku
+    set ZHCSSJ = #{uploadTime,jdbcType=VARCHAR}
+    where XTDM = #{sysCode,jdbcType=VARCHAR}
+      and SKUID = #{skuId,jdbcType=INTEGER}
+  </update>
+</mapper>
