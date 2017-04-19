@@ -16,11 +16,13 @@
         <!--<property name="beginningDelimiter" value="`"/>-->
         <!--<property name="endingDelimiter" value="`"/>-->
 
-        <!--<commentGenerator type="org.mybatis.generator.internal.my.MyCommentGenerator">-->
-        <commentGenerator>
-            <property name="suppressAllComments" value="true"/>
-            <property name="suppressDate" value="true"/>
-            <property name="addRemarkComments" value="true"/>
+        <!--用于生成注解-->
+        <!--<commentGenerator type="com.frotly.mybatis.commet.generator.MyCommentGenerator">-->
+        <!--用于打jar是maven插件生效-->
+        <commentGenerator type="com.frotly.mybatis.commet.generator.MyCommentGenerator">
+            <property name="javaFileEncoding" value="UTF-8" />
+            <property name="suppressAllComments" value="false"/>
+            <property name="suppressDate" value="false"/>
         </commentGenerator>
 
         <jdbcConnection driverClass="${jdbc.driverClass}"
@@ -35,7 +37,7 @@
 
         <javaModelGenerator targetPackage="${model.package}" targetProject="${target.project}">
             <property name="enableSubPackages" value="true"/>
-            <property name="trimStrings" value="true"/>
+            <property name="trimStrings" value="false"/>
             <!--<property name="constructorBased" value="true"/>-->
         </javaModelGenerator>
 
